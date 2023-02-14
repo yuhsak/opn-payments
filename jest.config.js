@@ -4,6 +4,7 @@ module.exports = {
   testMatch: [
     '**/test/**/*.(ts|tsx|js|jsx)',
     '**/*.(spec|test).(ts|tsx|js|jsx)',
+    '!**/__*.(ts|tsx|js|jsx)',
   ],
   transform: {
     '^.+\\.(t|j)sx?$': [
@@ -13,7 +14,7 @@ module.exports = {
         jsc: {
           externalHelpers: true,
           target: 'es2019',
-        }
+        },
       },
     ],
   },
