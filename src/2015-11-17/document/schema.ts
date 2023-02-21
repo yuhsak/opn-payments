@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { OpnPaymentsDocumentIdSchema } from './id'
+import { OpnPaymentsListSchema } from '../../list'
 
 export const OpnPaymentsDocumentSchema = z.object({
   object: z.literal('document'),
@@ -13,4 +14,7 @@ export const OpnPaymentsDocumentSchema = z.object({
   kind: z.string(),
 })
 
+export const OpnPaymentsDocumentListSchema = OpnPaymentsListSchema(OpnPaymentsDocumentSchema)
+
 export type OpnPaymentsDocument = z.infer<typeof OpnPaymentsDocumentSchema>
+export type OpnPaymentsDocumentList = z.infer<typeof OpnPaymentsDocumentListSchema>

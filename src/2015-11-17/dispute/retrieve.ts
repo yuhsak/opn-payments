@@ -1,5 +1,5 @@
 import { get } from '../../fetch'
-import type { OpnPaymentsDispute, OpnPaymentsDisputeSchema } from './schema'
+import type { OpnPaymentsDispute, OpnPaymentsDisputeList } from './schema'
 import {
   createListQuery,
   fetchAll,
@@ -14,27 +14,27 @@ export const fetchDispute = get((disputeId: string) => ({
 export const fetchDisputes = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/disputes`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsDisputeSchema>>
+}))<OpnPaymentsDisputeList>
 
 export const fetchAllDisputes = fetchAll(fetchDisputes)
 
 export const fetchClosedDisputes = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/disputes/closed`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsDisputeSchema>>
+}))<OpnPaymentsDisputeList>
 
 export const fetchAllClosedDisputes = fetchAll(fetchClosedDisputes)
 
 export const fetchOpenDisputes = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/disputes/open`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsDisputeSchema>>
+}))<OpnPaymentsDisputeList>
 
 export const fetchAllOpenDisputes = fetchAll(fetchOpenDisputes)
 
 export const fetchPendingDisputes = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/disputes/pending`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsDisputeSchema>>
+}))<OpnPaymentsDisputeList>
 
 export const fetchAllPendingDisputes = fetchAll(fetchPendingDisputes)

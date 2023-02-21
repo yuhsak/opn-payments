@@ -1,16 +1,11 @@
 import { get } from '../../fetch'
 import type {
   OpnPaymentsSchedule,
-  OpnPaymentsScheduleSchema,
-  OpnPaymentsChargeScheduleSchema,
-  OpnPaymentsTransferScheduleSchema,
+  OpnPaymentsScheduleList,
+  OpnPaymentsChargeScheduleList,
+  OpnPaymentsTransferScheduleList,
 } from './schema'
-import {
-  createListQuery,
-  fetchAll,
-  type OpnPaymentsList,
-  type OpnPaymentsListQueryParam,
-} from '../../list'
+import { createListQuery, fetchAll, type OpnPaymentsListQueryParam } from '../../list'
 
 export const fetchSchedule = get((scheduleId: string) => ({
   path: `/schedules/${scheduleId}`,
@@ -19,21 +14,21 @@ export const fetchSchedule = get((scheduleId: string) => ({
 export const fetchSchedules = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/schedules`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsScheduleSchema>>
+}))<OpnPaymentsScheduleList>
 
 export const fetchAllSchedules = fetchAll(fetchSchedules)
 
 export const fetchChargeSchedules = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/charges/schedules`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsChargeScheduleSchema>>
+}))<OpnPaymentsChargeScheduleList>
 
 export const fetchAllChargeSchedules = fetchAll(fetchChargeSchedules)
 
 export const fetchTransferSchedules = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/transfers/schedules`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsTransferScheduleSchema>>
+}))<OpnPaymentsTransferScheduleList>
 
 export const fetchAllTransferSchedules = fetchAll(fetchTransferSchedules)
 
@@ -42,11 +37,11 @@ export const fetchChargeSchedulesForCustomer = get(
     path: `/customers/${customerId}/schedules`,
     query: createListQuery(param),
   }),
-)<OpnPaymentsList<typeof OpnPaymentsChargeScheduleSchema>>
+)<OpnPaymentsChargeScheduleList>
 
 export const fetchTransferSchedulesForRecipient = get(
   (recipientId: string, param?: OpnPaymentsListQueryParam) => ({
     path: `/recipients/${recipientId}/schedules`,
     query: createListQuery(param),
   }),
-)<OpnPaymentsList<typeof OpnPaymentsTransferScheduleSchema>>
+)<OpnPaymentsTransferScheduleList>

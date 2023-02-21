@@ -1,6 +1,6 @@
 import { z } from 'zod'
-
 import { OpnPaymentsCardIdSchema } from './id'
+import { OpnPaymentsListSchema } from '../../list'
 
 export const OpnPaymentsCardSchema = z.object({
   object: z.literal('card'),
@@ -28,8 +28,6 @@ export const OpnPaymentsCardSchema = z.object({
   created: z.string(),
 })
 
-export type OpnPaymentsCard = z.infer<typeof OpnPaymentsCardSchema>
-
 export const OpnPaymentsDeletedCardSchema = z.object({
   object: z.literal('card'),
   id: OpnPaymentsCardIdSchema,
@@ -37,4 +35,10 @@ export const OpnPaymentsDeletedCardSchema = z.object({
   deleted: z.literal(true),
 })
 
+export const OpnPaymentsCardListSchema = OpnPaymentsListSchema(
+  z.union([OpnPaymentsCardSchema, OpnPaymentsDeletedCardSchema]),
+)
+
+export type OpnPaymentsCard = z.infer<typeof OpnPaymentsCardSchema>
 export type OpnPaymentsDeletedCard = z.infer<typeof OpnPaymentsDeletedCardSchema>
+export type OpnPaymentsCardList = z.infer<typeof OpnPaymentsCardListSchema>

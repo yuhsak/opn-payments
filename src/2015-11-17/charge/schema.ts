@@ -5,7 +5,7 @@ import { OpnPaymentsChargeIdSchema } from './id'
 import { OpnPaymentsCustomerIdSchema } from '../customer/id'
 import { OpnPaymentsTransactionIdSchema } from '../transaction/id'
 import { OpnPaymentsCardSchema, OpnPaymentsDeletedCardSchema } from '../card/schema'
-import { OpnPaymentsRefundSchema } from '../refund/schema'
+import { OpnPaymentsRefundListSchema } from '../refund/schema'
 import { OpnPaymentsDisputeSchema } from '../dispute/schema'
 
 export const OpnPaymentsChargeFailureCodeSchema = z.union([
@@ -67,7 +67,7 @@ export const OpnPaymentsChargeSchema = z.object({
   reference: z.string().nullable(),
   refundable: z.boolean(),
   refunded: z.number().int(),
-  refunds: OpnPaymentsListSchema(OpnPaymentsRefundSchema),
+  refunds: OpnPaymentsRefundListSchema,
   return_uri: z.string().nullable(),
   reversed: z.boolean(),
   reversed_at: z.string().nullable(),
@@ -82,6 +82,9 @@ export const OpnPaymentsChargeSchema = z.object({
   voided: z.boolean(),
 })
 
+export const OpnPaymentsChargeListSchema = OpnPaymentsListSchema(OpnPaymentsChargeSchema)
+
 export type OpnPaymentsCharge = z.infer<typeof OpnPaymentsChargeSchema>
 export type OpnPaymentsChargeFailureCode = z.infer<typeof OpnPaymentsChargeFailureCodeSchema>
 export type OpnPaymentsChargeStatus = z.infer<typeof OpnPaymentsChargeStatusSchema>
+export type OpnPaymentsChargeList = z.infer<typeof OpnPaymentsChargeListSchema>

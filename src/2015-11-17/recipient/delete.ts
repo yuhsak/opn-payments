@@ -1,6 +1,6 @@
 import { del } from '../../fetch'
-import type { OpnPaymentsRecipient } from './schema'
+import type { OpnPaymentsDeletedRecipient } from './schema'
 
 export const deleteRecipient = del((recipientId: string) => ({
   path: `/recipients/${recipientId}`,
-}))<OpnPaymentsRecipient>
+}))<OpnPaymentsDeletedRecipient>

@@ -3,6 +3,7 @@ import { OpnPaymentsOccurrenceIdSchema } from './id'
 import { OpnPaymentsChargeIdSchema } from '../charge/id'
 import { OpnPaymentsTransferIdSchema } from '../transfer/id'
 import { OpnPaymentsScheduleIdSchema } from '../schedule/id'
+import { OpnPaymentsListSchema } from '../../list'
 
 export const OpnPaymentsOccurrenceStatusSchema = z.union([
   z.literal('skipped'),
@@ -25,5 +26,8 @@ export const OpnPaymentsOccurrenceSchema = z.object({
   status: OpnPaymentsOccurrenceStatusSchema,
 })
 
+export const OpnPaymentsOccurrenceListSchema = OpnPaymentsListSchema(OpnPaymentsOccurrenceSchema)
+
 export type OpnPaymentsOccurrence = z.infer<typeof OpnPaymentsOccurrenceSchema>
 export type OpnPaymentsOccurrenceStatus = z.infer<typeof OpnPaymentsOccurrenceStatusSchema>
+export type OpnPaymentsOccurrenceList = z.infer<typeof OpnPaymentsOccurrenceListSchema>

@@ -1,11 +1,6 @@
 import { get } from '../../fetch'
-import type { OpnPaymentsLink, OpnPaymentsDeletedLink, OpnPaymentsLinkSchema } from './schema'
-import {
-  createListQuery,
-  fetchAll,
-  type OpnPaymentsListQueryParam,
-  type OpnPaymentsList,
-} from '../../list'
+import type { OpnPaymentsLink, OpnPaymentsDeletedLink, OpnPaymentsLinkList } from './schema'
+import { createListQuery, fetchAll, type OpnPaymentsListQueryParam } from '../../list'
 
 export const fetchLink = get((linkId: string) => ({
   path: `/links/${linkId}`,
@@ -14,6 +9,6 @@ export const fetchLink = get((linkId: string) => ({
 export const fetchLinks = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/links`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsLinkSchema>>
+}))<OpnPaymentsLinkList>
 
 export const fetchAllLinks = fetchAll(fetchLinks)

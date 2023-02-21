@@ -1,19 +1,18 @@
 import { get } from '../../fetch'
-import type { OpnPaymentsRecipient, OpnPaymentsRecipientSchema } from './schema'
-import {
-  createListQuery,
-  fetchAll,
-  type OpnPaymentsList,
-  OpnPaymentsListQueryParam,
-} from '../../list'
+import type {
+  OpnPaymentsRecipient,
+  OpnPaymentsDeletedRecipient,
+  OpnPaymentsRecipientList,
+} from './schema'
+import { createListQuery, fetchAll, OpnPaymentsListQueryParam } from '../../list'
 
 export const fetchRecipient = get((recipientId: string) => ({
   path: `/recipients/${recipientId}`,
-}))<OpnPaymentsRecipient>
+}))<OpnPaymentsRecipient | OpnPaymentsDeletedRecipient>
 
 export const fetchRecipients = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/recipients`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsRecipientSchema>>
+}))<OpnPaymentsRecipientList>
 
 export const fetchAllRecipients = fetchAll(fetchRecipients)

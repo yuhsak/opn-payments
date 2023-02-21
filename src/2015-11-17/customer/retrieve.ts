@@ -1,19 +1,18 @@
 import { get } from '../../fetch'
-import type { OpnPaymentsCustomer, OpnPaymentsCustomerSchema } from './schema'
-import {
-  createListQuery,
-  fetchAll,
-  type OpnPaymentsList,
-  type OpnPaymentsListQueryParam,
-} from '../../list'
+import type {
+  OpnPaymentsCustomer,
+  OpnPaymentsDeletedCustomer,
+  OpnPaymentsCustomerList,
+} from './schema'
+import { createListQuery, fetchAll, type OpnPaymentsListQueryParam } from '../../list'
 
 export const fetchCustomer = get((customerId: string) => ({
   path: `/customers/${customerId}`,
-}))<OpnPaymentsCustomer>
+}))<OpnPaymentsCustomer | OpnPaymentsDeletedCustomer>
 
 export const fetchCustomers = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/customers`,
   query: createListQuery(param),
-}))<OpnPaymentsList<typeof OpnPaymentsCustomerSchema>>
+}))<OpnPaymentsCustomerList>
 
 export const fetchAllCustomers = fetchAll(fetchCustomers)

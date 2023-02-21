@@ -8,7 +8,7 @@ import { OpnPaymentsCardIdSchema } from '../card/id'
 import { OpnPaymentsCustomerIdSchema } from '../customer/id'
 import { OpnPaymentsRecipientIdSchema } from '../recipient/id'
 import { OpnPaymentsListSchema } from '../../list'
-import { OpnPaymentsOccurrenceSchema } from '../occurrence'
+import { OpnPaymentsOccurrenceListSchema } from '../occurrence/schema'
 
 export const OpnPaymentsScheduledChargeSchema = z.object({
   object: z.literal('scheduled_charge'),
@@ -62,7 +62,7 @@ const OpnPaymentsPlainScheduleSchema = z.object({
   period: OpnPaymentsSchedulePeriodSchema,
   every: z.number().int(),
   on: z.record(z.number().int().array()),
-  occurrences: OpnPaymentsListSchema(OpnPaymentsOccurrenceSchema),
+  occurrences: OpnPaymentsOccurrenceListSchema,
   in_words: z.string(),
   status: OpnPaymentsScheduleStatusSchema,
   created: z.string(),
@@ -83,8 +83,19 @@ export const OpnPaymentsScheduleSchema = z.union([
   OpnPaymentsTransferScheduleSchema,
 ])
 
+export const OpnPaymentsChargeScheduleListSchema = OpnPaymentsListSchema(
+  OpnPaymentsChargeScheduleSchema,
+)
+export const OpnPaymentsTransferScheduleListSchema = OpnPaymentsListSchema(
+  OpnPaymentsTransferScheduleSchema,
+)
+export const OpnPaymentsScheduleListSchema = OpnPaymentsListSchema(OpnPaymentsScheduleSchema)
+
 export type OpnPaymentsChargeSchedule = z.infer<typeof OpnPaymentsChargeScheduleSchema>
 export type OpnPaymentsTransferSchedule = z.infer<typeof OpnPaymentsTransferScheduleSchema>
 export type OpnPaymentsSchedule = z.infer<typeof OpnPaymentsScheduleSchema>
 export type OpnPaymentsSchedulePeriod = z.infer<typeof OpnPaymentsSchedulePeriodSchema>
 export type OpnPaymentsScheduleStatus = z.infer<typeof OpnPaymentsScheduleStatusSchema>
+export type OpnPaymentsChargeScheduleList = z.infer<typeof OpnPaymentsChargeScheduleListSchema>
+export type OpnPaymentsTransferScheduleList = z.infer<typeof OpnPaymentsTransferScheduleListSchema>
+export type OpnPaymentsScheduleList = z.infer<typeof OpnPaymentsScheduleListSchema>

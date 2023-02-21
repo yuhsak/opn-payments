@@ -2,6 +2,7 @@ import { z } from 'zod'
 import { OpnPaymentsRecipientIdSchema } from './id'
 import { OpnPaymentsBankAccountSchema } from '../bank-account'
 import { OpnPaymentsScheduledTransferSchema } from '../schedule/schema'
+import { OpnPaymentsListSchema } from '../../list'
 
 export const OpnPaymentsRecipientFailureCodeSchema = z.union([
   z.literal('name_mismatch'),
@@ -37,6 +38,19 @@ export const OpnPaymentsRecipientSchema = z.object({
   verified_at: z.string().nullable(),
 })
 
+export const OpnPaymentsDeletedRecipientSchema = z.object({
+  object: z.literal('recipient'),
+  id: OpnPaymentsRecipientIdSchema,
+  livemode: z.boolean(),
+  deleted: z.literal(true),
+})
+
+export const OpnPaymentsRecipientListSchema = OpnPaymentsListSchema(
+  z.union([OpnPaymentsRecipientSchema, OpnPaymentsDeletedRecipientSchema]),
+)
+
 export type OpnPaymentsRecipient = z.infer<typeof OpnPaymentsRecipientSchema>
 export type OpnPaymentsRecipientFailureCode = z.infer<typeof OpnPaymentsRecipientFailureCodeSchema>
 export type OpnPaymentsRecipientType = z.infer<typeof OpnPaymentsRecipientTypeSchema>
+export type OpnPaymentsDeletedRecipient = z.infer<typeof OpnPaymentsDeletedRecipientSchema>
+export type OpnPaymentsRecipientList = z.infer<typeof OpnPaymentsRecipientListSchema>

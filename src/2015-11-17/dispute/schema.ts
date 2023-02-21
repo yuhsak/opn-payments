@@ -3,7 +3,7 @@ import { OpnPaymentsDisputeIdSchema } from './id'
 import { OpnPaymentsChargeIdSchema } from '../charge/id'
 import { OpnPaymentsTransactionIdSchema } from '../transaction/id'
 import { OpnPaymentsListSchema } from '../../list'
-import { OpnPaymentsDocumentSchema } from '../document'
+import { OpnPaymentsDocumentListSchema } from '../document/schema'
 
 export const OpnPaymentsDisputeStatusSchema = z.union([
   z.literal('open'),
@@ -23,7 +23,7 @@ export const OpnPaymentsDisputeSchema = z.object({
   closed_at: z.string().nullable(),
   created: z.string(),
   currency: z.string(),
-  documents: OpnPaymentsListSchema(OpnPaymentsDocumentSchema),
+  documents: OpnPaymentsDocumentListSchema,
   message: z.string().nullable(),
   metadata: z.unknown(),
   reason_code: z.string(),
@@ -32,5 +32,8 @@ export const OpnPaymentsDisputeSchema = z.object({
   transaction: OpnPaymentsTransactionIdSchema,
 })
 
+export const OpnPaymentsDisputeListSchema = OpnPaymentsListSchema(OpnPaymentsDisputeSchema)
+
 export type OpnPaymentsDispute = z.infer<typeof OpnPaymentsDisputeSchema>
 export type OpnPaymentsDisputeStatus = z.infer<typeof OpnPaymentsDisputeStatusSchema>
+export type OpnPaymentsDisputeList = z.infer<typeof OpnPaymentsDisputeListSchema>

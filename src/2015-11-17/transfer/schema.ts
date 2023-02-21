@@ -4,6 +4,7 @@ import { OpnPaymentsBankAccountSchema } from '../bank-account'
 import { OpnPaymentsRecipientIdSchema } from '../recipient/id'
 import { OpnPaymentsScheduleIdSchema } from '../schedule/id'
 import { OpnPaymentsTransactionIdSchema } from '../transaction/id'
+import { OpnPaymentsListSchema } from '../../list'
 
 export const OpnPaymentsTransferFailureCodeSchema = z.union([
   z.literal('insufficient_balance'),
@@ -38,5 +39,8 @@ export const OpnPaymentsTransferSchema = z.object({
   transaction: OpnPaymentsTransactionIdSchema,
 })
 
+export const OpnPaymentsTransferListSchema = OpnPaymentsListSchema(OpnPaymentsTransferSchema)
+
 export type OpnPaymentsTransfer = z.infer<typeof OpnPaymentsTransferSchema>
 export type OpnPaymentsTransferFailureCode = z.infer<typeof OpnPaymentsTransferFailureCodeSchema>
+export type OpnPaymentsTransferList = z.infer<typeof OpnPaymentsTransferListSchema>
