@@ -17,7 +17,7 @@
   "exports": {
     ".": "./lib/index.js",
     "./2015-11-17": "./lib/2015-11-17/index.js",
-    "./2015-11-17/fn": "./lib/2015-11-17/fn.js",
+    "./2015-11-17/class": "./lib/2015-11-17/class.js",
     "./2015-11-17/account": "./lib/2015-11-17/account/index.js",
     "./2015-11-17/balance": "./lib/2015-11-17/balance/index.js",
     "./2015-11-17/bank-account": "./lib/2015-11-17/bank-account/index.js",
@@ -38,7 +38,7 @@
     "./2015-11-17/transfer": "./lib/2015-11-17/transfer/index.js",
     "./config": "./lib/config.js",
     "./error": "./lib/error/index.js",
-    "./error/fn": "./lib/error/fn/index.js",
+    "./error/class": "./lib/error/class/index.js",
     "./util": "./util/index.js"
   },
   "files": [
