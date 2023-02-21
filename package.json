@@ -39,7 +39,8 @@
     "./config": "./lib/config.js",
     "./error": "./lib/error/index.js",
     "./error/class": "./lib/error/class/index.js",
-    "./util": "./lib/util/index.js"
+    "./util": "./lib/util/index.js",
+    "./list": "./lib/list/index.js"
   },
   "files": [
     "lib",
