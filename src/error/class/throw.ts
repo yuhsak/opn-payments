@@ -20,7 +20,7 @@ export const throwWhenError = <Args extends any[], T>(
     const res = await throwWhenNotJson(fn)(...args)
     if (isOpnPaymentsError(res)) {
       // throw new Error(`OpnPayments error. Code: ${res.code}, Message: ${res.message}`)
-      console.dir(res, { depth: null })
+      // console.dir(res, { depth: null })
       throw res
     }
     return res
