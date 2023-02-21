@@ -19,7 +19,7 @@ export const OpnPaymentsOccurrenceSchema = z.object({
   created: z.string(),
   message: z.string().nullable(),
   processed_at: z.string(),
-  result: z.union([OpnPaymentsChargeIdSchema, OpnPaymentsTransferIdSchema]),
+  result: z.union([OpnPaymentsChargeIdSchema, OpnPaymentsTransferIdSchema]).nullable(),
   retry_date: z.string().nullable(),
   schedule: OpnPaymentsScheduleIdSchema,
   schedule_date: z.string(),
