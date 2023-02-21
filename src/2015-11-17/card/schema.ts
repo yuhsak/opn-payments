@@ -24,7 +24,7 @@ export const OpnPaymentsCardSchema = z.object({
   state: z.string().nullable(),
   street1: z.string().nullable(),
   street2: z.string().nullable(),
-  tokenization_method: z.string().nullable(),
+  tokenization_method: z.string().nullable().optional(),
   created: z.string(),
 })
 

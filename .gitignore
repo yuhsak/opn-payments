@@ -3,3 +3,6 @@ node_modules/
 /lib/
 /coverage/
 .envrc
+
+/src/__test.ts
+*.restbook

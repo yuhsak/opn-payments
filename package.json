@@ -27,6 +27,7 @@
     "./2015-11-17/customer": "./lib/2015-11-17/customer/index.js",
     "./2015-11-17/dispute": "./lib/2015-11-17/dispute/index.js",
     "./2015-11-17/document": "./lib/2015-11-17/document/index.js",
+    "./2015-11-17/event": "./lib/2015-11-17/event/index.js",
     "./2015-11-17/forex": "./lib/2015-11-17/forex/index.js",
     "./2015-11-17/link": "./lib/2015-11-17/link/index.js",
     "./2015-11-17/occurrence": "./lib/2015-11-17/occurrence/index.js",

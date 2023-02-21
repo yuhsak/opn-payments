@@ -36,6 +36,7 @@ import {
   fetchPendingDisputes,
   fetchAllPendingDisputes,
 } from './dispute'
+import { fetchEvent, fetchEvents } from './event'
 import { fetchForex } from './forex'
 import { fetchLink, fetchLinks, fetchAllLinks, createLink, deleteLink } from './link'
 import { fetchOccurrence, fetchOccurrencesForSchedule } from './occurrence'
@@ -113,6 +114,8 @@ export class OpnPayments {
   public fetchAllOpenDisputes: ReturnType<typeof fetchAllOpenDisputes>
   public fetchPendingDisputes: ReturnType<typeof fetchPendingDisputes>
   public fetchAllPendingDisputes: ReturnType<typeof fetchAllPendingDisputes>
+  public fetchEvent: ReturnType<typeof fetchEvent>
+  public fetchEvents: ReturnType<typeof fetchEvents>
   public fetchForex: ReturnType<typeof fetchForex>
   public fetchLink: ReturnType<typeof fetchLink>
   public fetchLinks: ReturnType<typeof fetchLinks>
@@ -190,6 +193,8 @@ export class OpnPayments {
     this.fetchAllOpenDisputes = fetchAllOpenDisputes(this.config)
     this.fetchPendingDisputes = fetchPendingDisputes(this.config)
     this.fetchAllPendingDisputes = fetchAllPendingDisputes(this.config)
+    this.fetchEvent = fetchEvent(this.config)
+    this.fetchEvents = fetchEvents(this.config)
     this.fetchForex = fetchForex(this.config)
     this.fetchLink = fetchLink(this.config)
     this.fetchLinks = fetchLinks(this.config)

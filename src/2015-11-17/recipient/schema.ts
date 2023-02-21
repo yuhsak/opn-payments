@@ -25,7 +25,6 @@ export const OpnPaymentsRecipientSchema = z.object({
   bank_account: OpnPaymentsBankAccountSchema,
   created: z.string(),
   default: z.boolean(),
-  deleted: z.boolean(),
   description: z.string().nullable(),
   email: z.string().nullable(),
   failure_code: OpnPaymentsRecipientFailureCodeSchema.nullable(),

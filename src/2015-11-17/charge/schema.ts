@@ -83,7 +83,7 @@ export const OpnPaymentsChargeSchema = z.object({
   status: OpnPaymentsChargeStatusSchema,
   terminal: z.string().nullable(),
   transaction: OpnPaymentsTransactionIdSchema.nullable(),
-  transaction_fees: z.record(z.string()),
+  transaction_fees: z.record(z.string()).optional(),
   unmanaged_payment: z.record(z.string().nullable()).optional(),
   voided: z.boolean(),
 })
