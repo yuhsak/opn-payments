@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
   clearMocks: true,
   roots: ['<rootDir>/test', '<rootDir>/src'],
   testMatch: [
@@ -22,4 +23,8 @@ module.exports = {
   coverageDirectory: 'coverage',
   coverageProvider: 'babel',
   verbose: true,
+  // setupFilesAfterEnv: ['<rootDir>/test/__setup.ts'],
+  globalSetup: '<rootDir>/test/__global-setup.ts',
 }
+
+module.exports = config

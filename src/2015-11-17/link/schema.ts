@@ -20,4 +20,17 @@ export const OpnPaymentsLinkSchema = z.object({
   used: z.boolean(),
 })
 
+export const OpnPaymentsDeletedLinkSchema = z.object({
+  object: z.literal('link'),
+  id: OpnPaymentsLinkIdSchema,
+  livemode: z.boolean(),
+  deleted: z.boolean(),
+})
+
+export const OpnPaymentsLinkListSchema = OpnPaymentsListSchema(
+  z.union([OpnPaymentsLinkSchema, OpnPaymentsDeletedLinkSchema]),
+)
+
 export type OpnPaymentsLink = z.infer<typeof OpnPaymentsLinkSchema>
+export type OpnPaymentsDeletedLink = z.infer<typeof OpnPaymentsDeletedLinkSchema>
+export type OpnPaymentsLinkList = z.infer<typeof OpnPaymentsLinkListSchema>

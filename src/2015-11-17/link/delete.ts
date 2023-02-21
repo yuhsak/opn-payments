@@ -1,6 +1,6 @@
 import { del } from '../../fetch'
-import type { OpnPaymentsLink } from './schema'
+import type { OpnPaymentsDeletedLink } from './schema'
 
 export const deleteLink = del((linkId: string) => ({
   path: `/links/${linkId}`,
-}))<OpnPaymentsLink>
+}))<OpnPaymentsDeletedLink>

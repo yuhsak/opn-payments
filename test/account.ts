@@ -4,13 +4,6 @@ import { throwWhenError } from '../src/error/fn'
 
 const getAccount = throwWhenError(fetchAccount)(config)
 
-beforeAll(async () => {
-  const account = await getAccount()
-  if (account.livemode) {
-    throw new Error('This secret key is for PRODUCTION!')
-  }
-})
-
 describe('account', () => {
   test('fetchAccount', async () => {
     const account = await getAccount()
@@ -24,7 +17,7 @@ describe('account', () => {
     const res = await update({
       chain_enabled: account.chain_enabled,
     })
-    expect(res.ok).toBeTruthy()
+    expect(res.ok).toBe(true)
     if (res.ok) {
       expect(res.content.object).toBe('account')
       if (res.content.object === 'account') {
