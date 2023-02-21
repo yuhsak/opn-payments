@@ -1,6 +1,6 @@
 # opn-payments
 
-Server side client for OpnPayments.
+A fully typed server side client for OpnPayments.
 
 ## Install
 
@@ -11,7 +11,7 @@ npm install opn-payments
 ## Usage
 
 ```ts
-import { OpnPayments } from 'opn-payments/2015-11-17'
+import { OpnPayments } from 'opn-payments/2015-11-17/class'
 
 const client = new OpnPayments({
   secretKey: 'skey_xxx'
