@@ -4,14 +4,14 @@ import { throwWhenError } from '../src/error/fn'
 
 const getAccount = throwWhenError(fetchAccount)(config)
 
-describe('account', () => {
-  test('fetchAccount', async () => {
+describe('Account', () => {
+  test('Fetch account', async () => {
     const account = await getAccount()
     const fn = () => OpnPaymentsAccountSchema.parse(account)
     expect(fn).not.toThrowError()
   })
 
-  test('updateAccount', async () => {
+  test('Update account', async () => {
     const account = await getAccount()
     const update = updateAccount(config)
     const res = await update({

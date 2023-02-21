@@ -1,20 +1,44 @@
 import { post } from '../../fetch'
-import type { OpnPaymentsChargeSchedule, OpnPaymentsTransferSchedule } from './schema'
+import type {
+  OpnPaymentsChargeSchedule,
+  OpnPaymentsTransferSchedule,
+  OpnPaymentsScheduleWeekday,
+  OpnPaymentsScheduleWeekdayOfMonth,
+} from './schema'
+
+type CreateOpnPaymentsSchedulePayloadPeriodPattern =
+  | {
+      period: 'day'
+    }
+  | {
+      period: 'week'
+      on: {
+        weekdays: OpnPaymentsScheduleWeekday[]
+      }
+    }
+  | {
+      period: 'month'
+      on:
+        | {
+            days_of_month: number[]
+          }
+        | {
+            weekday_of_month: OpnPaymentsScheduleWeekdayOfMonth
+          }
+    }
 
 type CreateOpnPaymentsSchedulePayloadBase = {
-  start_date: string
+  start_date?: string
   end_date: string
-  period: 'day' | 'week' | 'month'
   every: number
-  on?: object
-}
+} & CreateOpnPaymentsSchedulePayloadPeriodPattern
 
 export type CreateOpnPaymentsChargeSchedulePayload = CreateOpnPaymentsSchedulePayloadBase & {
   charge: {
     customer: string
+    amount: number
     card?: string
     currency?: string
-    amount: number
     description?: string
     metadata?: unknown
   }

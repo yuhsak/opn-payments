@@ -12,6 +12,9 @@ export const createFetch = (config: OpnPaymentsConfig) => {
     const url = `${config.endpoint}${_path}`
     const headers = new Headers(init?.headers)
     headers.append('Authorization', basicAuth)
+    if (config.apiVersion) {
+      headers.append('Omise-Version', config.apiVersion)
+    }
 
     return _fetch(url, {
       ...init,
@@ -24,10 +27,10 @@ export type FetchResult<T, E> =
   | {
       ok: true
       status: number
-      content: T | E
+      content: T
     }
   | {
       ok: false
       status: number
-      content: string
+      content: string | E
     }

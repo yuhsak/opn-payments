@@ -1,5 +1,13 @@
-import { OpnPaymentsCard, OpnPaymentsDeletedCard } from './schema'
+import { OpnPaymentsCard, OpnPaymentsDeletedCard, OpnPaymentsCardFromToken } from './schema'
 
 export const isDeletedCard = (
-  card: OpnPaymentsCard | OpnPaymentsDeletedCard,
-): card is OpnPaymentsDeletedCard => !('location' in card) && card.deleted
+  card: OpnPaymentsCard | OpnPaymentsDeletedCard | OpnPaymentsCardFromToken,
+): card is OpnPaymentsDeletedCard => !('location' in card) && 'deleted' in card && card.deleted
+
+export const isCardFromToken = (
+  card: OpnPaymentsCard | OpnPaymentsDeletedCard | OpnPaymentsCardFromToken,
+): card is OpnPaymentsCardFromToken => !('location' in card) && !('deleted' in card)
+
+export const isCard = (
+  card: OpnPaymentsCard | OpnPaymentsDeletedCard | OpnPaymentsCardFromToken,
+): card is OpnPaymentsCard => !isDeletedCard(card) && !isCardFromToken(card)

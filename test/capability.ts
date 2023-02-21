@@ -4,8 +4,8 @@ import { throwWhenError } from '../src/error/fn'
 
 const getCapability = throwWhenError(fetchCapability)(config)
 
-describe('capability', () => {
-  test('fetchCapability', async () => {
+describe('Capability', () => {
+  test('Fetch capability', async () => {
     const capability = await getCapability()
     const fn = () => OpnPaymentsCapabilitySchema.parse(capability)
     expect(fn).not.toThrowError()

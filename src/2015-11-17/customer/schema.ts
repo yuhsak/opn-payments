@@ -24,9 +24,7 @@ export const OpnPaymentsDeletedCustomerSchema = z.object({
   deleted: z.literal(true),
 })
 
-export const OpnPaymentsCustomerListSchema = OpnPaymentsListSchema(
-  z.union([OpnPaymentsCustomerSchema, OpnPaymentsDeletedCustomerSchema]),
-)
+export const OpnPaymentsCustomerListSchema = OpnPaymentsListSchema(OpnPaymentsCustomerSchema)
 
 export type OpnPaymentsCustomer = z.infer<typeof OpnPaymentsCustomerSchema>
 export type OpnPaymentsDeletedCustomer = z.infer<typeof OpnPaymentsDeletedCustomerSchema>

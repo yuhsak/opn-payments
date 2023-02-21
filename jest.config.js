@@ -19,11 +19,11 @@ const config = {
       },
     ],
   },
-  collectCoverage: true,
+  collectCoverage: false,
   coverageDirectory: 'coverage',
   coverageProvider: 'babel',
   verbose: true,
-  // setupFilesAfterEnv: ['<rootDir>/test/__setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/__after-env-setup.ts'],
   globalSetup: '<rootDir>/test/__global-setup.ts',
 }
 

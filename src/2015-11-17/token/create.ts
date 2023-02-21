@@ -1,5 +1,5 @@
 import { post } from '../../fetch'
-import type { OpnPaymentsToken } from './schema'
+import type { OpnPaymentsFreshToken } from './schema'
 
 export type CreateOpnPaymentsTokenOnlyForTestingPayload = {
   expiration_month: number
@@ -22,4 +22,4 @@ export const createTokenOnlyForTesting = post(
     body: { card: payload },
     vault: true,
   }),
-)<OpnPaymentsToken>
+)<OpnPaymentsFreshToken>

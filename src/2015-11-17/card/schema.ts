@@ -35,10 +35,11 @@ export const OpnPaymentsDeletedCardSchema = z.object({
   deleted: z.literal(true),
 })
 
-export const OpnPaymentsCardListSchema = OpnPaymentsListSchema(
-  z.union([OpnPaymentsCardSchema, OpnPaymentsDeletedCardSchema]),
-)
+export const OpnPaymentsCardFromTokenSchema = OpnPaymentsCardSchema.omit({ location: true })
+
+export const OpnPaymentsCardListSchema = OpnPaymentsListSchema(OpnPaymentsCardSchema)
 
 export type OpnPaymentsCard = z.infer<typeof OpnPaymentsCardSchema>
 export type OpnPaymentsDeletedCard = z.infer<typeof OpnPaymentsDeletedCardSchema>
+export type OpnPaymentsCardFromToken = z.infer<typeof OpnPaymentsCardFromTokenSchema>
 export type OpnPaymentsCardList = z.infer<typeof OpnPaymentsCardListSchema>

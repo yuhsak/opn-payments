@@ -4,7 +4,11 @@ import { OpnPaymentsListSchema } from '../../list'
 import { OpnPaymentsChargeIdSchema } from './id'
 import { OpnPaymentsCustomerIdSchema } from '../customer/id'
 import { OpnPaymentsTransactionIdSchema } from '../transaction/id'
-import { OpnPaymentsCardSchema, OpnPaymentsDeletedCardSchema } from '../card/schema'
+import {
+  OpnPaymentsCardSchema,
+  OpnPaymentsDeletedCardSchema,
+  OpnPaymentsCardFromTokenSchema,
+} from '../card/schema'
 import { OpnPaymentsRefundListSchema } from '../refund/schema'
 import { OpnPaymentsDisputeSchema } from '../dispute/schema'
 
@@ -42,7 +46,9 @@ export const OpnPaymentsChargeSchema = z.object({
   branch: z.string().nullable(),
   capturable: z.boolean(),
   capture: z.boolean(),
-  card: z.union([OpnPaymentsCardSchema, OpnPaymentsDeletedCardSchema]).nullable(),
+  card: z
+    .union([OpnPaymentsCardSchema, OpnPaymentsDeletedCardSchema, OpnPaymentsCardFromTokenSchema])
+    .nullable(),
   created: z.string(),
   currency: z.string(),
   customer: OpnPaymentsCustomerIdSchema.nullable(),
