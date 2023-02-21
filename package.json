@@ -1,6 +1,6 @@
 {
   "name": "opn-payments",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Server side client for OpnPayments.",
   "author": {
     "name": "Yuhsak Inoue",
