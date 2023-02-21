@@ -1,5 +1,5 @@
 import { get } from '../../fetch'
-import type { OpnPaymentsCard, OpnPaymentsDeletedCard, OpnPaymentsCardList } from './schema'
+import type { OpnPaymentsCard, OpnPaymentsCardList } from './schema'
 import { createListQuery, type OpnPaymentsListQueryParam } from '../../list'
 
 export const fetchCard = get((customerId: string, cardId: string) => ({
