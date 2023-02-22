@@ -1,46 +1,16 @@
 import { config } from './__config'
-import * as Token from '../src/2015-11-17/token'
-import * as Customer from '../src/2015-11-17/customer'
 import * as Charge from '../src/2015-11-17/charge'
 import * as Refund from '../src/2015-11-17/refund'
 import { throwWhenError } from '../src/error/fn'
-
-const createTokenOnlyForTesting = throwWhenError(Token.createTokenOnlyForTesting)(config)
-const createCustomer = throwWhenError(Customer.createCustomer)(config)
+import { initCustomerAndCharge } from './__util'
 
 const fetchCharge = throwWhenError(Charge.fetchCharge)(config)
-const createCharge = throwWhenError(Charge.createCharge)(config)
 const captureCharge = throwWhenError(Charge.captureCharge)(config)
 
 const fetchRefund = throwWhenError(Refund.fetchRefund)(config)
 const fetchRefundsForCharge = throwWhenError(Refund.fetchRefundsForCharge)(config)
 const fetchRefunds = throwWhenError(Refund.fetchRefunds)(config)
 const createRefund = throwWhenError(Refund.createRefund)(config)
-
-const initToken = async () =>
-  createTokenOnlyForTesting({
-    name: 'TEST',
-    number: '4242424242424242',
-    expiration_month: 12,
-    expiration_year: 2039,
-    security_code: '999',
-    country: 'jp',
-  })
-
-const initCustomerAndCharge = async (capture = true) => {
-  const token = await initToken()
-  const customer = await createCustomer({
-    email: 'abc@example.com',
-    card: token.id,
-  })
-  const charge = await createCharge({
-    amount: 1000,
-    currency: 'jpy',
-    customer: customer.id,
-    capture,
-  })
-  return { token, customer, card: customer.cards.data[0]!, charge }
-}
 
 describe('Refund', () => {
   test('Create a refund for a charge', async () => {

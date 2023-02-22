@@ -3,13 +3,12 @@ import * as Token from '../src/2015-11-17/token'
 import * as Customer from '../src/2015-11-17/customer'
 import * as Card from '../src/2015-11-17/card'
 import { throwWhenError } from '../src/error/fn'
+import { initCustomerWithCard, initToken } from './__util'
 
 const fetchTokenOnlyForTesting = throwWhenError(Token.fetchTokenOnlyForTesting)(config)
-const createTokenOnlyForTesting = throwWhenError(Token.createTokenOnlyForTesting)(config)
 
 const fetchCustomer = throwWhenError(Customer.fetchCustomer)(config)
 const fetchCustomers = throwWhenError(Customer.fetchCustomers)(config)
-const createCustomer = throwWhenError(Customer.createCustomer)(config)
 const updateCustomer = throwWhenError(Customer.updateCustomer)(config)
 const deleteCustomer = throwWhenError(Customer.deleteCustomer)(config)
 
@@ -17,25 +16,6 @@ const fetchCard = throwWhenError(Card.fetchCard)(config)
 const fetchCardsForCustomer = throwWhenError(Card.fetchCardsForCustomer)(config)
 const updateCard = throwWhenError(Card.updateCard)(config)
 const deleteCard = throwWhenError(Card.deleteCard)(config)
-
-const initToken = async () =>
-  createTokenOnlyForTesting({
-    name: 'TEST',
-    number: '4242424242424242',
-    expiration_month: 12,
-    expiration_year: 2039,
-    security_code: '999',
-    country: 'jp',
-  })
-
-const initCustomerWithCard = async () => {
-  const token = await initToken()
-  const customer = await createCustomer({
-    email: 'abc@example.com',
-    card: token.id,
-  })
-  return { token, customer, card: customer.cards.data[0]! }
-}
 
 describe('Customer, Card', () => {
   test('Create a customer with a card', async () => {

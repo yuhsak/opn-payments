@@ -1,8 +1,8 @@
 import { config } from './__config'
 import * as Recipient from '../src/2015-11-17/recipient'
 import { throwWhenError } from '../src/error/fn'
+import { initRecipient } from './__util'
 
-const createRecipient = throwWhenError(Recipient.createRecipient)(config)
 const deleteRecipient = throwWhenError(Recipient.deleteRecipient)(config)
 const fetchRecipient = throwWhenError(Recipient.fetchRecipient)(config)
 const fetchRecipients = throwWhenError(Recipient.fetchRecipients)(config)
@@ -11,25 +11,14 @@ const verifyRecipientOnlyForTesting = throwWhenError(Recipient.verifyRecipientOn
   config,
 )
 
-const initRecipient = async () =>
-  createRecipient({
-    type: 'individual',
-    name: 'John Doe',
-    bank_account: {
-      name: 'John Doe',
-      number: '12345678',
-      account_type: 'normal',
-      branch_code: '001',
-      bank_code: '1206',
-    },
-  })
-
 describe('Recipient', () => {
   test('Create recipient', async () => {
-    const recipient = await initRecipient()
+    const recipient = await initRecipient(false)
     expect(() => Recipient.OpnPaymentsRecipientSchema.parse(recipient)).not.toThrowError()
+    expect(recipient.verified).toBe(false)
     const verified = await verifyRecipientOnlyForTesting(recipient.id)
     expect(() => Recipient.OpnPaymentsRecipientSchema.parse(verified)).not.toThrowError()
+    expect(verified.verified).toBe(true)
   })
 
   test('Delete recipient', async () => {
@@ -58,10 +47,6 @@ describe('Recipient', () => {
 
   test('Update recipient', async () => {
     const recipient = await initRecipient()
-    expect(recipient.verified).toBe(false)
-    await verifyRecipientOnlyForTesting(recipient.id)
-    const fetched = await fetchRecipient(recipient.id)
-    expect(fetched.verified).toBe(true)
     const updated = await updateRecipient(recipient.id, {
       name: 'John Doe B',
       type: 'corporation',
