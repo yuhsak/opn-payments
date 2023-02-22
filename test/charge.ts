@@ -128,6 +128,13 @@ describe('Charge', () => {
   })
 
   test('Fetch charges', async () => {
+    const { customer, card, token } = await initCustomerWithCard()
+    const charge = await createCharge({
+      amount: 1000,
+      currency: 'jpy',
+      customer: customer.id,
+      card: card.id,
+    })
     const charges = await fetchCharges()
     expect(() => Charge.OpnPaymentsChargeListSchema.parse(charges)).not.toThrowError()
   })

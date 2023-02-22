@@ -44,9 +44,7 @@ export const OpnPaymentsDeletedRecipientSchema = z.object({
   deleted: z.literal(true),
 })
 
-export const OpnPaymentsRecipientListSchema = OpnPaymentsListSchema(
-  z.union([OpnPaymentsRecipientSchema, OpnPaymentsDeletedRecipientSchema]),
-)
+export const OpnPaymentsRecipientListSchema = OpnPaymentsListSchema(OpnPaymentsRecipientSchema)
 
 export type OpnPaymentsRecipient = z.infer<typeof OpnPaymentsRecipientSchema>
 export type OpnPaymentsRecipientFailureCode = z.infer<typeof OpnPaymentsRecipientFailureCodeSchema>

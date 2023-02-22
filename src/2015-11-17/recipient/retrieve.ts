@@ -8,7 +8,7 @@ import { createListQuery, fetchAll, OpnPaymentsListQueryParam } from '../../list
 
 export const fetchRecipient = get((recipientId: string) => ({
   path: `/recipients/${recipientId}`,
-}))<OpnPaymentsRecipient | OpnPaymentsDeletedRecipient>
+}))<OpnPaymentsRecipient>
 
 export const fetchRecipients = get((param?: OpnPaymentsListQueryParam) => ({
   path: `/recipients`,
