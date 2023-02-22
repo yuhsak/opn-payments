@@ -163,7 +163,7 @@ export type OpnPaymentsEventKey = z.infer<typeof OpnPaymentsEventKeySchema>
 
 export type OpnPaymentsChargeEvent = z.infer<typeof OpnPaymentsChargeEventSchema>
 export type OpnPaymentsCustomerEvent = z.infer<typeof OpnPaymentsCustomerEventSchema>
-export type OpnPaymentDeletedsCustomerEvent = z.infer<typeof OpnPaymentsDeletedCustomerEventSchema>
+export type OpnPaymentsDeletedCustomerEvent = z.infer<typeof OpnPaymentsDeletedCustomerEventSchema>
 export type OpnPaymentsCardEvent = z.infer<typeof OpnPaymentsCardEventSchema>
 export type OpnPaymentsDeletedCardEvent = z.infer<typeof OpnPaymentsDeletedCardEventSchema>
 export type OpnPaymentsDisputeEvent = z.infer<typeof OpnPaymentsDisputeEventSchema>
