@@ -8,7 +8,7 @@ export type CreateOpnPaymentsTransferPayload = {
   recipient?: string
 }
 
-export const createTransfer = post((payload: CreateOpnPaymentsTransferPayload) => ({
+export const createTransfer = post((payload?: CreateOpnPaymentsTransferPayload) => ({
   path: `/transfers`,
-  body: payload,
+  ...(payload ? { body: payload } : {}),
 }))<OpnPaymentsTransfer>

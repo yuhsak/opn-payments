@@ -24,7 +24,6 @@ export const OpnPaymentsTransferSchema = z.object({
   bank_account: OpnPaymentsBankAccountSchema,
   created: z.string(),
   currency: z.string(),
-  deleted: z.boolean(),
   fail_fast: z.boolean(),
   failure_code: OpnPaymentsTransferFailureCodeSchema.nullable(),
   failure_message: z.string().nullable(),
@@ -36,11 +35,19 @@ export const OpnPaymentsTransferSchema = z.object({
   schedule: OpnPaymentsScheduleIdSchema.nullable(),
   sent: z.boolean(),
   sent_at: z.string().nullable(),
-  transaction: OpnPaymentsTransactionIdSchema,
+  transaction: OpnPaymentsTransactionIdSchema.nullable(),
+})
+
+export const OpnPaymentsDeletedTransferSchema = z.object({
+  object: z.literal('transfer'),
+  id: OpnPaymentsTransferIdSchema,
+  livemode: z.boolean(),
+  deleted: z.literal(true),
 })
 
 export const OpnPaymentsTransferListSchema = OpnPaymentsListSchema(OpnPaymentsTransferSchema)
 
 export type OpnPaymentsTransfer = z.infer<typeof OpnPaymentsTransferSchema>
+export type OpnPaymentsDeletedTransfer = z.infer<typeof OpnPaymentsDeletedTransferSchema>
 export type OpnPaymentsTransferFailureCode = z.infer<typeof OpnPaymentsTransferFailureCodeSchema>
 export type OpnPaymentsTransferList = z.infer<typeof OpnPaymentsTransferListSchema>
