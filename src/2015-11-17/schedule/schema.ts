@@ -29,8 +29,8 @@ export const OpnPaymentsScheduledTransferSchema = z.object({
   id: OpnPaymentsScheduledTransferIdSchema,
   livemode: z.boolean(),
   currency: z.string(),
-  amount: z.number().int(),
-  percentage_of_balance: z.number(),
+  amount: z.number().int().nullable(),
+  percentage_of_balance: z.number().nullable(),
   recipient: OpnPaymentsRecipientIdSchema,
 })
 
