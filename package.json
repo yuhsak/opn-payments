@@ -44,6 +44,8 @@
     "./list": "./lib/list/index.js"
   },
   "files": [
+    "README.md",
+    "LICENSE",
     "lib",
     "src",
     "!lib/*.tsbuildinfo",
