@@ -5,9 +5,9 @@ import { OpnPaymentsChargeSchema } from '../charge/schema'
 import { OpnPaymentsCardSchema, OpnPaymentsDeletedCardSchema } from '../card/schema'
 import { OpnPaymentsCustomerSchema, OpnPaymentsDeletedCustomerSchema } from '../customer/schema'
 import { OpnPaymentsDisputeSchema } from '../dispute/schema'
-import { OpnPaymentsRecipientSchema } from '../recipient/schema'
+import { OpnPaymentsRecipientSchema, OpnPaymentsDeletedRecipientSchema } from '../recipient/schema'
 import { OpnPaymentsRefundSchema } from '../refund/schema'
-import { OpnPaymentsTransferSchema } from '../transfer/schema'
+import { OpnPaymentsTransferSchema, OpnPaymentsDeletedTransferSchema } from '../transfer/schema'
 import { OpnPaymentsScheduleSchema } from '../schedule/schema'
 
 export const OpnPaymentsEventKeyForChargeSchema = z.union([
@@ -42,6 +42,7 @@ export const OpnPaymentsEventKeyForRecipientSchema = z.union([
   z.literal('recipient.deactivate'),
   z.literal('recipient.verify'),
 ])
+export const OpnPaymentsEventKeyForDeletedRecipientSchema = z.literal('recipient.destroy')
 
 export const OpnPaymentsEventKeyForRefundSchema = z.literal('refund.create')
 
@@ -52,6 +53,7 @@ export const OpnPaymentsEventKeyForTransferSchema = z.union([
   z.literal('transfer.send'),
   z.literal('transfer.pay'),
 ])
+export const OpnPaymentsEventKeyForDeletedTransferSchema = z.literal('transfer.destroy')
 
 export const OpnPaymentsEventKeyForScheduleSchema = z.union([
   z.literal('schedule.create'),
@@ -67,8 +69,10 @@ export const OpnPaymentsEventKeySchema = z.union([
   OpnPaymentsEventKeyForDeletedCardSchema,
   OpnPaymentsEventKeyForDisputeSchema,
   OpnPaymentsEventKeyForRecipientSchema,
+  OpnPaymentsEventKeyForDeletedRecipientSchema,
   OpnPaymentsEventKeyForRefundSchema,
   OpnPaymentsEventKeyForTransferSchema,
+  OpnPaymentsEventKeyForDeletedTransferSchema,
   OpnPaymentsEventKeyForScheduleSchema,
 ])
 
@@ -115,6 +119,11 @@ export const OpnPaymentsRecipientEventSchema = OpnPaymentsEventSchemaBase.extend
   data: OpnPaymentsRecipientSchema,
 })
 
+export const OpnPaymentsDeletedRecipientEventSchema = OpnPaymentsEventSchemaBase.extend({
+  key: OpnPaymentsEventKeyForDeletedRecipientSchema,
+  data: OpnPaymentsDeletedRecipientSchema,
+})
+
 export const OpnPaymentsRefundEventSchema = OpnPaymentsEventSchemaBase.extend({
   key: OpnPaymentsEventKeyForRefundSchema,
   data: OpnPaymentsRefundSchema,
@@ -123,6 +132,11 @@ export const OpnPaymentsRefundEventSchema = OpnPaymentsEventSchemaBase.extend({
 export const OpnPaymentsTransferEventSchema = OpnPaymentsEventSchemaBase.extend({
   key: OpnPaymentsEventKeyForTransferSchema,
   data: OpnPaymentsTransferSchema,
+})
+
+export const OpnPaymentsDeletedTransferEventSchema = OpnPaymentsEventSchemaBase.extend({
+  key: OpnPaymentsEventKeyForDeletedTransferSchema,
+  data: OpnPaymentsDeletedTransferSchema,
 })
 
 export const OpnPaymentsScheduleEventSchema = OpnPaymentsEventSchemaBase.extend({
@@ -138,8 +152,10 @@ export const OpnPaymentsEventSchema = z.union([
   OpnPaymentsDeletedCardEventSchema,
   OpnPaymentsDisputeEventSchema,
   OpnPaymentsRecipientEventSchema,
+  OpnPaymentsDeletedRecipientEventSchema,
   OpnPaymentsRefundEventSchema,
   OpnPaymentsTransferEventSchema,
+  OpnPaymentsDeletedTransferEventSchema,
   OpnPaymentsScheduleEventSchema,
 ])
 
@@ -156,8 +172,14 @@ export type OpnPaymentsEventKeyForDeletedCard = z.infer<
 >
 export type OpnPaymentsEventKeyForDispute = z.infer<typeof OpnPaymentsEventKeyForDisputeSchema>
 export type OpnPaymentsEventKeyForRecipient = z.infer<typeof OpnPaymentsEventKeyForRecipientSchema>
+export type OpnPaymentsEventKeyForDeletedRecipient = z.infer<
+  typeof OpnPaymentsEventKeyForDeletedRecipientSchema
+>
 export type OpnPaymentsEventKeyForRefund = z.infer<typeof OpnPaymentsEventKeyForRefundSchema>
 export type OpnPaymentsEventKeyForTransfer = z.infer<typeof OpnPaymentsEventKeyForTransferSchema>
+export type OpnPaymentsEventKeyForDeletedTransfer = z.infer<
+  typeof OpnPaymentsEventKeyForDeletedTransferSchema
+>
 export type OpnPaymentsEventKeyForSchedule = z.infer<typeof OpnPaymentsEventKeyForScheduleSchema>
 export type OpnPaymentsEventKey = z.infer<typeof OpnPaymentsEventKeySchema>
 
@@ -168,8 +190,12 @@ export type OpnPaymentsCardEvent = z.infer<typeof OpnPaymentsCardEventSchema>
 export type OpnPaymentsDeletedCardEvent = z.infer<typeof OpnPaymentsDeletedCardEventSchema>
 export type OpnPaymentsDisputeEvent = z.infer<typeof OpnPaymentsDisputeEventSchema>
 export type OpnPaymentsRecipientEvent = z.infer<typeof OpnPaymentsRecipientEventSchema>
+export type OpnPaymentsDeletedRecipientEvent = z.infer<
+  typeof OpnPaymentsDeletedRecipientEventSchema
+>
 export type OpnPaymentsRefundEvent = z.infer<typeof OpnPaymentsRefundEventSchema>
 export type OpnPaymentsTransferEvent = z.infer<typeof OpnPaymentsTransferEventSchema>
+export type OpnPaymentsDeletedTransferEvent = z.infer<typeof OpnPaymentsDeletedTransferEventSchema>
 export type OpnPaymentsScheduleEvent = z.infer<typeof OpnPaymentsScheduleEventSchema>
 export type OpnPaymentsEvent = z.infer<typeof OpnPaymentsEventSchema>
 
