@@ -47,8 +47,10 @@
     "README.md",
     "LICENSE",
     "lib",
-    "src",
     "!lib/*.tsbuildinfo",
+    "!lib/__*",
+    "src",
+    "!src/__*",
     "tsconfig.json"
   ],
   "scripts": {
