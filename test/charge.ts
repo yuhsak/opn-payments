@@ -7,6 +7,7 @@ import { initToken, initCustomerWithCard } from './__util'
 
 const fetchCustomer = throwWhenError(Customer.fetchCustomer)(config)
 const updateCustomer = throwWhenError(Customer.updateCustomer)(config)
+const deleteCustomer = throwWhenError(Customer.deleteCustomer)(config)
 
 const deleteCard = throwWhenError(Card.deleteCard)(config)
 
@@ -103,6 +104,19 @@ describe('Charge', () => {
     const fetchedB = await fetchCharge(charge.id)
     expect(() => Charge.OpnPaymentsChargeSchema.parse(fetchedB)).not.toThrowError()
     expect(Card.isDeletedCard(fetchedB.card!)).toBe(true)
+  })
+
+  test('Fetch charge after deleting customer', async () => {
+    const { customer, card, token } = await initCustomerWithCard()
+    const charge = await createCharge({
+      amount: 1000,
+      currency: 'jpy',
+      customer: customer.id,
+      card: card.id,
+    })
+    const deletedCustomer = await deleteCustomer(customer.id)
+    const fetchedCharge = await fetchCharge(charge.id)
+    expect(!!fetchedCharge.card && Card.isDeletedCard(fetchedCharge.card)).toBe(true)
   })
 
   test('Fetch charges', async () => {
